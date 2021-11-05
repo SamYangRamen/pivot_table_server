@@ -1,5 +1,8 @@
 package seongbo.pivot.service;
 
+import seongbo.pivot.DTO.BasicDTO.SheetRangeDTO;
+
 public interface SheetService {
-  public void testMethodService();
+
+  public Integer initSheetDataService(SheetRangeDTO dto);
 }
