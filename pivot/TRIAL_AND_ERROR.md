@@ -4,6 +4,8 @@
 
 
 
+
+
 ## 테스트 코드 작성에 대하여
 
 
@@ -28,13 +30,19 @@ https://www.whiteship.me/springboot-no-more-runwith/
 
 
 
+
+
 ## CORS Policy
+
+
 
 한 컴퓨터에서 클라이언트 및 서버를 실행하고 서로에게 HTTTP 요청/응답을 보내려고 하면 **Access to XMLHttpRequest has been blocked by CORS policy** 라는 메시지를 콘솔에 띄우며 오류가 발생한다.
 그 이유는 CORS Policy 때문임
 
 https://coding-groot.tistory.com/91
 https://kamang-it.tistory.com/entry/Web%EB%8F%99%EC%9D%BC-%EC%B6%9C%EC%B2%98-%EC%A0%95%EC%B1%85-CORS-%EB%8F%84%EB%8C%80%EC%B2%B4-%EB%AD%98%EA%B9%8C
+
+
 
 따라서 CORS 표준을 지키기 위해 아래와 같은 클래스를 작성하였음
 
@@ -52,3 +60,47 @@ public class WebConfig implements WebMvcConfigurer {
 }
 ```
 
+
+
+
+
+## Database 연결
+
+
+
+### Linux에 MariaDB 설치하는 과정
+
+1. 설치
+
+    - `sudo apt-get instrall mariadb-server`
+
+2. 비밀번호 설정 (https://m.blog.naver.com/6116949/221992559683)
+
+    1. `sudo mysql`
+
+    2. 아래 둘 중 하나를 적용
+
+       ```mariadb
+       update user set plugin='' where User='root';
+       set password = password('777777');
+       flush privileges;
+       ```
+
+       ```mariadb
+       set password for 'root'@'localhost' = password('777777');
+       ```
+
+3. DB 편집기
+
+    - DBeaver 21.2.4 (https://dbeaver.io/download/)
+
+4. Linux OS에 MariaDB를 설치했을 때 기본적으로 설정되는 URL
+
+    - `jdbc:mysql://localhost:3306/`
+
+
+
+### JPA vs MyBatis?
+
+혼용하고자 한다.
+단순한 CRUD 작업은 JPA를, 복잡한 데이터를 추출해야 하는 경우에는 직접 쿼리문을 작성하여 MyBatis를 통해 데이터를 가져올 수 있는 개발 환경을 구축해보고자 함
