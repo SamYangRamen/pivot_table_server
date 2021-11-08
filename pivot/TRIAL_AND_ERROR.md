@@ -104,3 +104,28 @@ public class WebConfig implements WebMvcConfigurer {
 
 혼용하고자 한다.
 단순한 CRUD 작업은 JPA를, 복잡한 데이터를 추출해야 하는 경우에는 직접 쿼리문을 작성하여 MyBatis를 통해 데이터를 가져올 수 있는 개발 환경을 구축해보고자 함
+
+
+
+### JPQL 사용 시 주의점
+
+https://stay-hungry.tistory.com/20
+
+https://kkamdung.tistory.com/120
+
+`JpaRepository`를 `extends`하는 Repository 안에서 어떤 메서드에 `@Query` Annotation을 붙이고 `SELECT ... FROM table_name` String을 안에 집어넣어줬을 때, 즉 `@Query("SELECT ... FROM table_name")` 라고 작성했을 때, 'table_name' 위치에는 실제 데이터베이스의 테이블명도 아니고 `@Table(name = "...")` Annotation 안의 '...'도 아닌, 해당 Entity의 클래스명을 입력해주어야 한다.
+
+
+
+### JPA 사용 시 테이블명이 대문자일 때 테이블을 찾지 못하는 문제
+
+https://velog.io/@gillog/JPA-Spring-Boot-JPA-Entity-Table-%EB%8C%80-%EC%86%8C%EB%AC%B8%EC%9E%90-%EA%B5%AC%EB%B6%84-%EB%AA%BB%ED%95%98%EB%8A%94-%EA%B2%BD%EC%9A%B0-%ED%95%B4%EA%B2%B0
+
+TEST_DB DB에 "TEST_TABLE"라는 이름의 테이블을 생성하고, Entity 클래스에 `@Table(name="TEST_TABLE")` 라고 작성하고 나서 앱을 실행하면, `Table 'TEST_DB.TEST_TABLE' doesn't exist' 에러가 발생한다. 그 이유는 Spring Boot의 기본 DB Physical Naming 전략이 아래와 같기 때문이다.
+
+- **모든 도트는 밑줄**로 대체, **Camel Case 대문자는 밑줄**로 대체, 모든 **테이블은 소문자**로 구성
+
+따라서 아래와 같은 설정을 `application.properties`에 추가해야 한다.
+
+- `spring.jpa.hibernate.naming.physical-strategy = org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl`
+

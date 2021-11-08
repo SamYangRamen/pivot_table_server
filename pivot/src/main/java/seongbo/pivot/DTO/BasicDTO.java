@@ -1,6 +1,7 @@
 package seongbo.pivot.DTO;
 
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +22,16 @@ public class BasicDTO {
   @Setter
   @NoArgsConstructor
   @AllArgsConstructor
-  public static class TestData {
-    private Integer num;
+  public static class TestNumData {
+    private Integer data;
+  }
+
+  @Getter
+  @Setter
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class TestStringData {
+    private String data;
   }
 
   @Getter
@@ -55,5 +64,15 @@ public class BasicDTO {
     private Integer sheetId;
     private SheetRangeDTO sheetRange;
     private List<CellDataDTO> cells;
+  }
+
+  @Getter
+  @Setter
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class SheetInitDTO {
+    private String sheetName;
+    private Integer row;
+    private Integer col;
   }
 }

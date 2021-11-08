@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import seongbo.pivot.DTO.BasicDTO.DTO;
+import seongbo.pivot.DTO.BasicDTO.SheetInitDTO;
 import seongbo.pivot.DTO.BasicDTO.SheetRangeDTO;
 import seongbo.pivot.service.SheetService;
 
@@ -25,7 +26,7 @@ public class SheetController {
 
   @PostMapping("POST/sheet")
   @ResponseBody
-  public Integer initSheetData(@RequestBody DTO<SheetRangeDTO> dto) {
+  public Integer initSheetData(@RequestBody DTO<SheetInitDTO> dto) {
     return sheetService.initSheetDataService(dto.getDto());
   }
 }
