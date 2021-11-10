@@ -41,8 +41,8 @@ public class BasicDTO {
   public static class CellDataDTO {
     private Integer sheetId;
     private boolean isPivot;
-    private Integer rowKey;
-    private Integer colKey;
+    private Integer row;
+    private Integer col;
     private String data;
     private String dataType;
   }
@@ -51,7 +51,19 @@ public class BasicDTO {
   @Setter
   @NoArgsConstructor
   @AllArgsConstructor
-  public static class SheetRangeDTO {
+  public static class CellInitDTO {
+    private Integer sheetId;
+    private Integer row;
+    private Integer col;
+    private String data;
+  }
+
+  @Getter
+  @Setter
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class CellLocationDTO {
+    private Integer sheetId;
     private Integer row;
     private Integer col;
   }
@@ -70,9 +82,18 @@ public class BasicDTO {
   @Setter
   @NoArgsConstructor
   @AllArgsConstructor
+  public static class SheetRangeDTO {
+    private Integer maxRow;
+    private Integer maxCol;
+  }
+
+  @Getter
+  @Setter
+  @NoArgsConstructor
+  @AllArgsConstructor
   public static class SheetInitDTO {
     private String sheetName;
-    private Integer row;
-    private Integer col;
+    private Integer maxRow;
+    private Integer maxCol;
   }
 }

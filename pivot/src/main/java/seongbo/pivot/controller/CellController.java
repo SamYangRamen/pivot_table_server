@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import seongbo.pivot.DTO.BasicDTO.CellDataDTO;
+import seongbo.pivot.DTO.BasicDTO.CellInitDTO;
+import seongbo.pivot.DTO.BasicDTO.CellLocationDTO;
 import seongbo.pivot.DTO.BasicDTO.DTO;
 import seongbo.pivot.DTO.BasicDTO.SheetInitDTO;
 import seongbo.pivot.service.CellService;
@@ -16,25 +19,24 @@ import seongbo.pivot.service.SheetService;
 @Slf4j
 @Controller
 @RestController
-public class SheetController {
+public class CellController {
 
-  SheetService sheetService;
+  CellService cellService;
 
   @Autowired
-  public SheetController(SheetService sheetService) {
-    this.sheetService = sheetService;
+  public CellController(CellService cellService) {
+    this.cellService = cellService;
   }
 
-  @PostMapping("POST/sheet")
+  @PostMapping("POST/cell")
   @ResponseBody
-  public Integer initSheetData(@RequestBody DTO<SheetInitDTO> dto) {
-    sheetService.initSheetDataService(dto.getDto());
-    return 1;
+  public Integer insertCellData(@RequestBody DTO<CellInitDTO> dto) {
+    return cellService.insertCellDataService(dto.getDto());
   }
 
-  @DeleteMapping("DELETE/sheet")
+  @DeleteMapping("DELETE/cell")
   @ResponseBody
-  public Integer deleteSheetData(@RequestBody DTO<Integer> dto) {
-    return sheetService.deleteSheetDataService(dto.getDto());
+  public Integer deleteSheetData(@RequestBody DTO<CellLocationDTO> dto) {
+    return cellService.deleteCellDataService(dto.getDto());
   }
 }

@@ -129,3 +129,12 @@ TEST_DB DB에 "TEST_TABLE"라는 이름의 테이블을 생성하고, Entity 클
 
 - `spring.jpa.hibernate.naming.physical-strategy = org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl`
 
+
+
+### JPA 사용 시 delete가 안 되는 문제
+
+https://velog.io/@moonyoung/JPA-JPA-Repository-%EC%88%98%EC%A0%95%EC%82%AD%EC%A0%9C%EC%99%80-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98
+
+https://happyer16.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9A%94%EC%B2%ADrequest%EC%8B%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%8B%9C%EC%9E%91%EC%9D%80-%EC%96%B4%EB%94%94%EC%84%9C-%ED%95%A0%EA%B9%8C
+
+Custom delete 메서드에 `@Transactional` Annotation을 붙이면 정상적으로 delete가 된다.

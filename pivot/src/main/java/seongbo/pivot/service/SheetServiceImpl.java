@@ -20,16 +20,31 @@ public class SheetServiceImpl implements SheetService {
 
   @Override
   public Integer initSheetDataService(SheetInitDTO dto) {
-    Integer maxIdx;
+    Integer maxSheetId;
 
     try {
-      maxIdx = sheetRepository.findFirstByOrderByIdxDesc().getIdx();
+      maxSheetId = sheetRepository.findFirstByOrderBySheetIdDesc().getSheetId();
     } catch (Exception e) {
-      maxIdx = 0;
+      maxSheetId = 0;
     }
 
-    sheetRepository.save(
-        new SheetEntity(maxIdx + 1, dto.getSheetName(), dto.getRow(), dto.getCol()));
+    SheetEntity sheetEntity = new SheetEntity();
+    sheetEntity.setSheetId(maxSheetId + 1);
+    sheetEntity.setSheetName(dto.getSheetName());
+    sheetEntity.setMaxRow(dto.getMaxRow());
+    sheetEntity.setMaxCol(dto.getMaxCol());
+    sheetRepository.save(sheetEntity);
+    return 1;
+  }
+
+  @Override
+  public Integer deleteSheetDataService(Integer sheetId) {
+    try {
+      sheetRepository.deleteById(sheetId);
+    } catch (Exception e) {
+      return 0;
+    }
+
     return 1;
   }
 }
