@@ -1,9 +1,12 @@
 package seongbo.pivot.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import seongbo.pivot.DAO.entity.SheetEntity;
+import seongbo.pivot.DTO.BasicDTO.SheetInfoDTO;
 import seongbo.pivot.DTO.BasicDTO.SheetInitDTO;
 import seongbo.pivot.repository.SheetRepository;
 
@@ -34,7 +37,7 @@ public class SheetServiceImpl implements SheetService {
     sheetEntity.setMaxRow(dto.getMaxRow());
     sheetEntity.setMaxCol(dto.getMaxCol());
     sheetRepository.save(sheetEntity);
-    return 1;
+    return maxSheetId + 1;
   }
 
   @Override
@@ -46,5 +49,23 @@ public class SheetServiceImpl implements SheetService {
     }
 
     return 1;
+  }
+
+  @Override
+  public List<SheetEntity> getSheetInfoListService() {
+    try {
+      return sheetRepository.findAll();
+      /*
+      List<SheetEntity> selectedData = sheetRepository.findAll();
+      List<SheetInfoDTO> returnData = new ArrayList<>();
+      for(SheetEntity item : selectedData) {
+        returnData.add(new SheetInfoDTO(item.getSheetId(), item.getSheetName(), item.getMaxRow(), item.getMaxCol()));
+      }
+
+      return returnData;
+      */
+    } catch (Exception e) {
+      return null;
+    }
   }
 }

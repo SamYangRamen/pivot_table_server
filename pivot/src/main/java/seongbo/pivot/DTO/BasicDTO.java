@@ -96,4 +96,15 @@ public class BasicDTO {
     private Integer maxRow;
     private Integer maxCol;
   }
+
+  @Getter
+  @Setter
+  @NoArgsConstructor
+  @AllArgsConstructor
+  public static class SheetInfoDTO {
+    private Integer sheetId;
+    private String sheetName;
+    private Integer maxRow;
+    private Integer maxCol;
+  }
 }
